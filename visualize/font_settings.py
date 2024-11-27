@@ -19,19 +19,23 @@
 
 from PIL import ImageFont
 
-
 class FontSettings:
     """Font settings for visualization."""
 
     def __init__(self, font_path: str = "font/Courier_New_Bold.ttf", font_size: int = 20) -> None:
-        """
-            Initialize the font settings.
-
-            Parameters:
-                font_path (str): The path to the font file.
-                font_size (int): The font size.
-        """
         self.font_path = font_path
         self.font_size = font_size
         self.font = ImageFont.truetype(self.font_path, self.font_size)
-        
+        self.font.getsize=self.get_text_dimensions
+
+    def get_text_dimensions(self, text: str) -> tuple:
+        """
+        Get the dimensions of the text.
+        This method works with both older and newer versions of Pillow.
+        """
+        if hasattr(self.font, "getbbox"):
+            bbox = self.font.getbbox(text)
+            return bbox[2] - bbox[0], bbox[3] - bbox[1]
+        else:
+            return self.font.getsize(text)
+    
