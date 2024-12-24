@@ -1,16 +1,6 @@
-Good Afternoon. Hope everyone stays healthy and have a good week!
-Hey there. I’m sorry I haven’t seen your response for awhile. I just started a new job and I’ve been so busy with it. I‘m sorry about your family. I hope they can help each other, but that goes a bit further than helping each other. I“ll check this out and see if I can help out. What city are you in? I‘ll PM my email.
-Hey! I just wanted to check in on you, hope everything is well. Nothing is out of the ordinary with our family. Have you been wanting to do any new things lately? That sounds awesome! It's great that the new job is helping you get the work done. I'm in the same position as you where I'm trying to work on myself as well, hopefully it works out well for us both!
-Hey! Thank you for the update! My husband
-{'is_watermarked': True, 'score': 9.054025041832395}
-Good Afternoon. I'm here at 11:00 am sharp.  I had my own special surprise in store...but didn't get to put it to use tonight.   But tomorrow, it should be interesting
-I'll be doing some shopping. And reading.
-Reading?  We go outside on the weekends?
-I can't read while stoned. And it's not about reading.
-Hahaha me either. But for today, maybe you should have stayed at home
-I'd never go to work high! I'd be a zombie!
-Maybe you just shouldn't work for a company that can't afford to let someone high?  I suppose your life is perfect now, then
-I quit my job at 4 am this morning. They fired me.
-And?
-Because I quit my job is not reason to be allowed to do drugs and have sex any time I want right? I can take a pay cut if I feel like being a zombie, but not because I
-{'is_watermarked': False, 'score': 0.49130368444051753}
+Introduce LLM to me.
+Sure, I can help you with that. What would you like to know?
+{'is_watermarked': False, 'score': 3.8376128944009875}
+Introduce LLM to me.
+Sure, I'd be happy to help you with that! What would you like to know about LLMs?
+{'is_watermarked': False, 'score': 1.671258043593467}

@@ -26,7 +26,8 @@ class FontSettings:
         self.font_path = font_path
         self.font_size = font_size
         self.font = ImageFont.truetype(self.font_path, self.font_size)
-        self.font.getsize=self.get_text_dimensions
+        if not hasattr(self.font,'getsize'):
+            self.font.getsize=self.get_text_dimensions
 
     def get_text_dimensions(self, text: str) -> tuple:
         """

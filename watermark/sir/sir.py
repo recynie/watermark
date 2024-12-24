@@ -30,7 +30,7 @@ from exceptions.exceptions import AlgorithmNameMismatchError
 from visualize.data_for_visualization import DataForVisualization
 from utils.utils import create_directory_for_file, load_config_file
 from transformers import LogitsProcessor, LogitsProcessorList, BertTokenizer, BertModel
-
+import torch
 
 class SIRConfig:
     """Config class for SIR algorithm, load config file and initialize parameters."""
@@ -144,7 +144,7 @@ class SIRUtils:
     def _get_transform_model(self, model_name: str, input_dim: int) -> TransformModel:
         """Get the transform model from the provided model name."""
         model = TransformModel(input_dim=input_dim)
-        model.load_state_dict(torch.load(model_name))
+        model.load_state_dict(torch.load(model_name,map_location=torch.device('cpu')))  #! cpu
         return model
     
     def get_bias(self, input_ids: torch.LongTensor) -> list[int]:
