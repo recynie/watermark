@@ -1,0 +1,17 @@
+model_id='Qwen/Qwen2.5-3B'
+# model_id='facebook/opt-1.3b'
+device_map='auto'
+prompt='''Please paraphrase the following text while ensuring that the core meaning of the original is preserved. Use different vocabulary, sentence structures, and expressions. The paraphrased text should be fluent and natural, avoiding direct copying of phrases or sentence structures from the original.
+Paraphrasing Requirements:
+- Maintain the core information and intent of the original text.
+- Use synonyms, different sentence structures, or alternative expressions.
+- Ensure the paraphrased text is coherent and grammatically correct.
+- Avoid introducing new information or omitting important details.
+- Original Text are braketed in `###`
+
+Original Text:
+###{}###
+
+Paraphrased Text:
+
+'''
