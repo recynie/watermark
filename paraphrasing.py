@@ -43,6 +43,8 @@ class Watermarker(object):
         return concated
 
 class RewirteAttacker(object):
+    '''watermark collision attack当中的paraphrasing attack.
+    与一般paraphrasing的区别: rewrite攻击中用来重述的LM是自带水印的'''
     def __init__(self,
                  lm,
                  attacker_lm,
@@ -69,6 +71,8 @@ class RewirteAttacker(object):
 from transformers import AutoTokenizer, AutoModelForCausalLM
 from toml import load
 class ParaphrasingAttacker(object):
+    '''paraphrasing attack implemention
+    使用LM重述带有水印的文本'''
     def __init__(self,cfg:str='config/Qwen.toml'):
         self.args=load(cfg)
         self.pipe = pipeline(
