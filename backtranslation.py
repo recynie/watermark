@@ -11,7 +11,7 @@ from volcengine.base.Service import Service
 def make_md5(s, encoding='utf-8'):
     return md5(s.encode(encoding)).hexdigest()
 class baidu_api():
-    def __init__(self, id='20241205002219403', key='Ga82ntMvdShXvRL5P8OR'):
+    def __init__(self, id='', key=''):
         self.id = id
         self.key=key
         self.endpoint='http://api.fanyi.baidu.com'
@@ -45,8 +45,8 @@ class baidu_api():
 
 class volc_api():
     def __init__(self,
-                id='AKLTYzUzMGNjMzQ0ZTNkNGEzOGE2ZGYyZTM3ZjNhODg4ODg',
-                key='WlRGbVpXRXpOR0kxTVRsaE5EbGxNVGc1Tnpnd1lqVmtZakUwTWprMU5qVQ=='):
+                id='',
+                key=''):
         self.id=id
         self.key=key
         self.service_info = \
