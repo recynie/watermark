@@ -15,10 +15,10 @@ from volcengine.Credentials import Credentials
 from volcengine.ServiceInfo import ServiceInfo
 from volcengine.base.Service import Service
 
-# baidu_id = '20241205002219403'
-# baidu_key = 'Ga82ntMvdShXvRL5P8OR'
-# volc_id = 'AKLTYzUzMGNjMzQ0ZTNkNGEzOGE2ZGYyZTM3ZjNhODg4ODg'
-# volc_key = 'WlRGbVpXRXpOR0kxTVRsaE5EbGxNVGc1Tnpnd1lqVmtZakUwTWprMU5qVQ=='
+baidu_id = '20241205002219403'
+baidu_key = 'Ga82ntMvdShXvRL5P8OR'
+volc_id = ''
+volc_key = ''
 def make_md5(s, encoding='utf-8'):
     return md5(s.encode(encoding)).hexdigest()
 class baidu_api():
