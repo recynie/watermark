@@ -1,20 +1,28 @@
+"""
+run:
+
+pip install volcengine
+"""
+
 import requests
 import random
 import json
 import time
 from hashlib import md5
-import os
-
-secret_key = os.getenv("MY_SECRET_KEY")
 
 from volcengine.ApiInfo import ApiInfo
 from volcengine.Credentials import Credentials
 from volcengine.ServiceInfo import ServiceInfo
 from volcengine.base.Service import Service
+
+# baidu_id = '20241205002219403'
+# baidu_key = 'Ga82ntMvdShXvRL5P8OR'
+# volc_id = 'AKLTYzUzMGNjMzQ0ZTNkNGEzOGE2ZGYyZTM3ZjNhODg4ODg'
+# volc_key = 'WlRGbVpXRXpOR0kxTVRsaE5EbGxNVGc1Tnpnd1lqVmtZakUwTWprMU5qVQ=='
 def make_md5(s, encoding='utf-8'):
     return md5(s.encode(encoding)).hexdigest()
 class baidu_api():
-    def __init__(self, id='20241205002219403', key='Ga82ntMvdShXvRL5P8OR'):
+    def __init__(self, id=baidu_id, key=baidu_key):
         self.id = id
         self.key=key
         self.endpoint='http://api.fanyi.baidu.com'
@@ -48,8 +56,8 @@ class baidu_api():
 
 class volc_api():
     def __init__(self,
-                id='AKLTYzUzMGNjMzQ0ZTNkNGEzOGE2ZGYyZTM3ZjNhODg4ODg',
-                key='WlRGbVpXRXpOR0kxTVRsaE5EbGxNVGc1Tnpnd1lqVmtZakUwTWprMU5qVQ=='):
+                id=volc_id,
+                key=volc_key):
         self.id=id
         self.key=key
         self.service_info = \
