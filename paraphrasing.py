@@ -8,9 +8,6 @@ from PIL import Image
 from transformers import pipeline
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
-import subprocess
-import os
-
 import os
 dir='/root/autodl-tmp/cache/'
 os.environ["HF_ENDPOINT"] = 'https://hf-mirror.com'
@@ -44,7 +41,6 @@ class Watermarker(object):
         concated.paste(viz1,(0,0))
         concated.paste(viz2,(w1,0))
         return concated
-
 
 class RewirteAttacker(object):
     def __init__(self,
