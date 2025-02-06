@@ -1,6 +1,13 @@
-model_id='Qwen/Qwen2.5-3B'
-# model_id='facebook/opt-1.3b'
+# paraphraser config
+
+model_id='./models/qwen'
+
 device_map='auto'
+max_new_tokens=200
+do_sample=true
+temperature=0.1
+repetition_penalty=1.1
+
 prompt='''Please paraphrase the following text while ensuring that the core meaning of the original is preserved. Use different vocabulary, sentence structures, and expressions. The paraphrased text should be fluent and natural, avoiding direct copying of phrases or sentence structures from the original.
 Paraphrasing Requirements:
 - Maintain the core information and intent of the original text.
