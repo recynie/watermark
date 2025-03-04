@@ -2,6 +2,7 @@ import logging
 import os
 import torch
 import json
+import argparse  # Add argparse for command-line argument parsing
 from rich.progress import Progress, BarColumn, TextColumn, TimeRemainingColumn
 from paraphrasing import ParaphrasingAttacker, Watermarker
 from torch.utils.data import DataLoader
@@ -11,6 +12,11 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 from waterbench_loader import PromptDataset
 from rich import print
 logging.getLogger("transformers").setLevel(logging.ERROR)
+
+# Parse command-line arguments
+parser = argparse.ArgumentParser(description='Run watermarking benchmark.')
+parser.add_argument('--wm', type=str,default='UPV', required=False, help='Watermark identifier')
+args = parser.parse_args()
 
 # Device
 device = "cuda" if torch.cuda.is_available() else "cpu"
@@ -29,24 +35,25 @@ transformers_config = TransformersConfig(
     repetition_penalty=1.1,
     temperature=0.1,
 )
+WATERMARK = args.wm  # Set WATERMARK from command-line argument
 
 # Load watermarker and attacker
 wm = AutoWatermark.load(
-    'Unigram', 
-    algorithm_config='config/Unigram.json',
+    WATERMARK, 
+    algorithm_config=f'config/{WATERMARK}.json',
     transformers_config=transformers_config
 )
 watermarker = Watermarker(wm)
 attacker = ParaphrasingAttacker(config='config/Qwen.toml')
 
 # 数据集和文件路径设置
-dataset = PromptDataset('alpacafarm')[:260];jsonl_file = 'results/paraphrasing_results_b000-260.jsonl'
-# dataset = PromptDataset('alpacafarm')[260:530];jsonl_file = 'results/paraphrasing_results_b260-530.jsonl'
-# dataset = PromptDataset('alpacafarm')[530:];jsonl_file = 'results/paraphrasing_results_b530-805.jsonl'
+dataset = PromptDataset('alpacafarm');jsonl_file = f'results/{WATERMARK}/paraphrasing_results.jsonl'
+# dataset = PromptDataset('alpacafarm')[:402];jsonl_file = f'results/{WATERMARK}/paraphrasing_results_b000-402.jsonl'
+# dataset = PromptDataset('alpacafarm')[402:];jsonl_file = f'results/{WATERMARK}/paraphrasing_results_b402-805.jsonl'
 dataloader = DataLoader(dataset, batch_size=64, shuffle=False, num_workers=4)
 
 # JSONL 文件设置：确保目标目录存在，并清空之前的文件内容（如果存在）
-os.makedirs('results', exist_ok=True)
+os.makedirs(f'results/{WATERMARK}', exist_ok=True)
 with open(jsonl_file, 'w', encoding='utf-8') as f:
     pass  # 清空文件
 
@@ -73,6 +80,7 @@ with Progress(
                 print(f'[red bold]Error:[/red bold] {e.args[0]}\n[bold]Prompt[/bold]\n{prompt}')
                 ans, attacked_ans = '[failed]', '[failed]'
                 sc, para_sc, delta = 0, 0, 0
+                raise
             finally:
                 record = {
                     "prompt": prompt,
