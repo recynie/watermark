@@ -36,6 +36,7 @@ transformers_config = TransformersConfig(
     temperature=0.1,
 )
 WATERMARK = args.wm  # Set WATERMARK from command-line argument
+ATTACK='paraphrasing'
 
 # Load watermarker and attacker
 wm = AutoWatermark.load(
@@ -47,13 +48,13 @@ watermarker = Watermarker(wm)
 attacker = ParaphrasingAttacker(config='config/Qwen.toml')
 
 # 数据集和文件路径设置
-dataset = PromptDataset('alpacafarm');jsonl_file = f'results/{WATERMARK}/paraphrasing_results.jsonl'
-# dataset = PromptDataset('alpacafarm')[:402];jsonl_file = f'results/{WATERMARK}/paraphrasing_results_b000-402.jsonl'
-# dataset = PromptDataset('alpacafarm')[402:];jsonl_file = f'results/{WATERMARK}/paraphrasing_results_b402-805.jsonl'
+dataset = PromptDataset('alpacafarm');jsonl_file = f'results/raw/{WATERMARK}/paraphrasing_results.jsonl'
+# dataset = PromptDataset('alpacafarm')[:402];jsonl_file = f'results/raw/{WATERMARK}/paraphrasing_results_b000-402.jsonl'
+# dataset = PromptDataset('alpacafarm')[402:];jsonl_file = f'results/raw/{WATERMARK}/paraphrasing_results_b402-805.jsonl'
 dataloader = DataLoader(dataset, batch_size=64, shuffle=False, num_workers=4)
 
 # JSONL 文件设置：确保目标目录存在，并清空之前的文件内容（如果存在）
-os.makedirs(f'results/{WATERMARK}', exist_ok=True)
+os.makedirs(f'results/raw/{WATERMARK}', exist_ok=True)
 with open(jsonl_file, 'w', encoding='utf-8') as f:
     pass  # 清空文件
 
@@ -83,6 +84,8 @@ with Progress(
                 raise
             finally:
                 record = {
+                    "watermark": WATERMARK,
+                    "attack": ATTACK,
                     "prompt": prompt,
                     "generated_answer": ans,
                     "generated_score": sc,

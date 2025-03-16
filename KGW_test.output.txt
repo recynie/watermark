@@ -1,6 +1,0 @@
-Introduce LLM to me.
-Sure, I can help you with that. What would you like to know?
-{'is_watermarked': False, 'score': 3.8376128944009875}
-Introduce LLM to me.
-Sure, I'd be happy to help you with that! What would you like to know about LLMs?
-{'is_watermarked': False, 'score': 1.671258043593467}
