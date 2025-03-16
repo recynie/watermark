@@ -80,19 +80,34 @@ class ParaphrasingAttacker(object):
             model=self.args['model_id'], 
             torch_dtype=torch.bfloat16, 
             device_map=self.args.get('device_map',"auto"),
-            token=self.args.get('token'),
-            max_new_tokens=500,
-            do_sample=True,
-            temperature=0.2,
-            # repetition_penalty=1.1,
+            max_new_tokens=self.args.get('max_new_tokens'),
+            do_sample=self.args.get('do_sample'),
+            temperature=self.args.get('temperature'),
+            repetition_penalty=self.args.get('repetition_penalty',1.1),
         )
     
     def pipeline_paraphrase(self,s:str) -> str:
         prompt=self.args.get('prompt').format(s)
         resp:str=self.pipe(prompt)[0]['generated_text']
         return resp.replace(prompt,'').replace('#','')
+    
+    def pipeline_paraphrase_batch(self, texts: list[str]) -> list:
+        """
+        批量进行 paraphrase。输入为字符串列表，返回改写后的字符串列表。
+        """
+        # 为每个文本构造对应的提示语
+        prompts:list[str] = [self.args.get('prompt').format(text) for text in texts]
+        # pipeline 支持批量输入
+        outputs = self.pipe(prompts)
+        # 提取并后处理生成的文本，去除原始提示部分和特殊符号
+        paraphrased_texts = [
+            out[0]['generated_text'].replace(prompt, '').replace('#', '')
+            for out, prompt in zip(outputs, prompts)
+        ]
+        return paraphrased_texts
+
 if __name__=='__main__':
-    para=ParaphrasingAttacker(cfg='config/Qwen.toml')
+    para=ParaphrasingAttacker(config='config/Qwen.toml')
     print(para.pipeline_paraphrase(
 'The city was built to make it easier for people from all over the world to travel to this city,\
  which was once isolated by the Alps mountains.'
