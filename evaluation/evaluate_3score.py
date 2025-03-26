@@ -56,7 +56,7 @@ def process_file(attack_num, watermark_num):
                 attacked_ppl_value = compute_ppl(attacked_answer)
                 # generated_meteor = meteor_score.meteor_score(reference_texts,generated_answer.split())
                 # attacked_meteor = meteor_score.meteor_score(reference_texts,attacked_answer.split())
-                meteor = meteor_score.meteor_score(generated_answer.split(),attacked_answer.split())
+                meteor = meteor_score.meteor_score([generated_answer.split()],attacked_answer.split())
                 mean_generated_ppl += generated_ppl_value
                 mean_attacked_ppl += attacked_ppl_value
                 mean_lsc+=lsc
