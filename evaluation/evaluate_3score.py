@@ -41,7 +41,7 @@ def process_file(attack_num, watermark_num):
     mean_meteor = 0
     mean_lsc = 0
     cnt = 0
-    file_path = f"archieve//raw//{attack_algorithm[attack_num]}_{watermark_algorithm[watermark_num]}.jsonl"
+    file_path = f"path archieve//raw//{attack_algorithm[attack_num]}_{watermark_algorithm[watermark_num]}.jsonl"
     print(f"{file_path} finish")
     with open(file_path, "r", encoding="utf-8") as f1:
         for line in tqdm(f1):
@@ -78,7 +78,7 @@ def process_file(attack_num, watermark_num):
     print(f"delta_ppl is {delta_ppl}\nmean_meteor is {mean_meteor}\nlsc is {mean_lsc}")
     return mean_generated_ppl,mean_meteor,delta_ppl,mean_lsc
 
-# 加载 Qwen2.5-0.5B
+# 加载 Qwen2.5-0.5B,更改为自己的模型
 model_name = "Qwen/Qwen2.5-0.5B"
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 model = AutoModelForCausalLM.from_pretrained(model_name)
